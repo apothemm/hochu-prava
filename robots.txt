@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /ai-visual.html
+Disallow: /preview.html
+Sitemap: https://apothemm.github.io/hochu-prava/sitemap.xml

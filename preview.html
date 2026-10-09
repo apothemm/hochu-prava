@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>#ХОЧУПРАВА — просмотр всех страниц</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&family=Unbounded:wght@500&display=swap">
+<style>
+  body{margin:0;font:500 14px/1.4 Manrope,system-ui,sans-serif;background:#1d1d1b;color:#fff}
+  .shell{height:100vh;display:flex;flex-direction:column}
+  .top{height:58px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .logo{font:500 18px Unbounded,sans-serif;color:#ffdd57;text-decoration:none}
+  .url{margin-left:auto;font:12px ui-monospace,monospace;opacity:.6}
+  .top a.open,.top button{color:#1d1d1b;background:#ffdd57;border:0;border-radius:10px;padding:8px 12px;font:700 13px Manrope,sans-serif;text-decoration:none;cursor:pointer}
+  .top button{background:#3f424b;color:#fff}
+  .body{flex:1;display:flex;min-height:0}
+  nav{width:270px;flex:none;overflow:auto;padding:12px;background:#25272f}
+  nav h4{margin:14px 8px 6px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.45}
+  nav button{display:block;width:100%;text-align:left;border:0;background:none;color:#fff;padding:9px 10px;border-radius:10px;font:600 13px Manrope,sans-serif;cursor:pointer}
+  nav button:hover,nav button.active{background:#ffdd57;color:#1d1d1b}
+  .stage{flex:1;display:flex;justify-content:center;background:#3f424b;overflow:auto}
+  iframe{border:0;background:#fff;width:100%;height:100%}
+  .stage.mobile iframe{width:390px;height:844px;margin:20px;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  @media(max-width:760px){nav{width:170px}.url{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="top">
+    <a class="logo" href="preview.html">#хочуправа</a><strong>Просмотр сайта</strong>
+    <span class="url" id="url">/index.html</span>
+    <button type="button" id="device">📱 Мобильный</button>
+    <a class="open" id="open" href="index.html" target="_blank">Открыть ↗</a>
+  </div>
+  <div class="body">
+    <nav id="nav">
+      <h4>Основные</h4>
+      <button data-p="index.html" class="active">Главная — о школе</button>
+      <button data-p="catalog.html">Обучение (каталог)</button>
+      <button data-p="prices.html">Тарифы и цены</button>
+      <button data-p="contacts.html">Контакты и заявка</button>
+      <h4>Блоки каталога</h4>
+      <button data-p="catalog.html#b">Категория B</button>
+      <button data-p="catalog.html#a">Категория A</button>
+      <button data-p="catalog.html#additional">Доп. вождение</button>
+      <button data-p="catalog.html#fear">Боюсь водить</button>
+      <button data-p="catalog.html#return">Вернуться за руль</button>
+      <button data-p="catalog.html#path">Как получить права</button>
+      <h4>Школа</h4>
+      <button data-p="transfer.html">Переход из другой школы</button>
+      <button data-p="autopark.html">Автопарк</button>
+      <button data-p="team.html">Команда</button>
+      <button data-p="reviews.html">Отзывы</button>
+      <button data-p="faq.html">Вопросы и ответы</button>
+      <button data-p="honestly.html">Честно о школе</button>
+      <h4>Журнал</h4>
+      <button data-p="blog.html">Журнал</button>
+      <button data-p="article-checklist.html">Чек-лист</button>
+      <button data-p="article-exam-mistakes.html">Ошибки на экзамене</button>
+      <button data-p="article-path.html">Путь от А до Я</button>
+      <button data-p="article-pain.html">Боли курсантов</button>
+      <button data-p="article-choice.html">Как выбрать автошколу</button>
+      <button data-p="article-online.html">Онлайн-теория</button>
+      <h4>Служебные</h4>
+      <button data-p="privacy.html">Политика данных</button>
+      <button data-p="ai-visual.html">AI visual concept</button>
+      <button data-p="404.html">Страница 404</button>
+    </nav>
+    <div class="stage" id="stage"><iframe id="frame" src="index.html" title="Предпросмотр страницы"></iframe></div>
+  </div>
+</div>
+<script>
+  var frame = document.getElementById("frame"), stage = document.getElementById("stage");
+  document.getElementById("nav").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-p]"); if (!b) return;
+    var p = b.getAttribute("data-p");
+    frame.src = p;
+    document.getElementById("url").textContent = "/" + p;
+    document.getElementById("open").href = p;
+    document.querySelectorAll("#nav button").forEach(function (x) { x.classList.toggle("active", x === b); });
+  });
+  document.getElementById("device").addEventListener("click", function () {
+    var m = stage.classList.toggle("mobile");
+    this.textContent = m ? "🖥 Десктоп" : "📱 Мобильный";
+  });
+</script>
+</body>
+</html>
